@@ -1,8 +1,9 @@
-#Mie code Equations
+# Mie Code Equations
 This document lays out the math behind Mätzler's Mie scattering codes.
 
 ## mie()
 Computation of Mie efficiencies for a single sphere.
+
 ### Mätzler's comment
 Computation of Mie Efficiencies for give complex refractive-index ration m=m'+im" and size parameter x=k0*a, where k0= wave number in ambient medium, a=sphere radius, using complex Mie Coefficients an and bn for n=1 to nmax,
 s. Bohren and Huffman (1983) BEWI:TDD122, p. 103, 119-122,477.

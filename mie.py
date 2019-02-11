@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.special import jv, yv
+import warnings
 
 def mie_ab(m: complex, x: float) -> np.ndarray:
     z = m * x
@@ -120,7 +121,25 @@ def mie_s12(m: complex, x: float, u: float) -> np.ndarray:
     S2 = (an @ tin.transpose()) + (bn @ pin.transpose())
     return np.array([S1, S2])
 
+class InputDomainWarning(Warning):
+    pass
+
 def miecoated_ab1(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
+    if (m1 * x).imag > 30:
+        warnings.warn('Im(m1*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * x).imag > 30:
+        warnings.warn('Im(m2*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * y).imag > 30:
+        warnings.warn('Im(m2*y) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
     if x == y:
         raise ValueError('x == y, size parameters cannot be the same size.')
     elif x > y:
@@ -186,6 +205,21 @@ def miecoated_ab1(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
     return np.array([an, bn])
 
 def miecoated_ab2(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
+    if (m1 * x).imag > 30:
+        warnings.warn('Im(m1*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * x).imag > 30:
+        warnings.warn('Im(m2*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * y).imag > 30:
+        warnings.warn('Im(m2*y) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
     if x == y:
         raise ValueError('x == y, size parameters cannot be the same size.')
     elif x > y:
@@ -241,6 +275,21 @@ def miecoated_ab2(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
     return np.array([an, bn])
 
 def miecoated_ab3(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
+    if (m1 * x).imag > 30:
+        warnings.warn('Im(m1*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * x).imag > 30:
+        warnings.warn('Im(m2*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * y).imag > 30:
+        warnings.warn('Im(m2*y) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
     if x == y:
         raise ValueError('x == y, size parameters cannot be the same size.')
     elif x > y:
@@ -294,6 +343,21 @@ def miecoated_ab3(m1: complex, m2: complex, x: float, y: float) -> np.ndarray:
     return np.array([aa, bb])
 
 def miecoated(m1: complex, m2: complex, x: float, y: float, opt: int = 1) -> np.ndarray:
+    if (m1 * x).imag > 30:
+        warnings.warn('Im(m1*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * x).imag > 30:
+        warnings.warn('Im(m2*x) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
+    elif (m2 * y).imag > 30:
+        warnings.warn('Im(m2*y) > 30. This could result in bad solutions. See '
+            'B&H p. 485. Compare the output of miecoated_ab1, miecoated_ab2, '
+            'and miecoated_ab3 and be very careful if they give significantly '
+            'different results.', InputDomainWarning)
     if x == y:
         return mie(m1, y)
     elif x == 0:
